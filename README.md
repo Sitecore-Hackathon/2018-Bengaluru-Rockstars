@@ -2,7 +2,7 @@
 
 # Submission Boilerplate
 
-Welcome to Sitecore Hackathon 2018.
+Welcome to Sitecore Hackathon 2018 - Submission by Bengluru Rockstars.
 
 The Hackathon site can be found at http://www.sitecorehackathon.org/sitecore-hackathon-2018/
 
