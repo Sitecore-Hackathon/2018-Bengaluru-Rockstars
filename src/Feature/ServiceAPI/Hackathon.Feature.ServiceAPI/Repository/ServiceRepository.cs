@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Hackathon.Feature.XConnectUtility.Models;
+using Hackathon.Feature.ServiceAPI.Models;
 using Sitecore.Data;
 using Sitecore;
 using Sitecore.Configuration;
@@ -12,7 +12,7 @@ using Sitecore.XConnect;
 using Sitecore.XConnect.Client;
 using System.Threading.Tasks;
 
-namespace Hackathon.Feature.XConnectUtility.Repository
+namespace Hackathon.Feature.ServiceAPI.Repository
 {
     public class ServiceRepository : IServiceRepository
     {
@@ -27,7 +27,7 @@ namespace Hackathon.Feature.XConnectUtility.Repository
 
             bool success = true;
 
-            foreach (var emailIntent in tempList().EmailIntentList) // list.EmailIntentList
+            foreach (var emailIntent in  list.EmailIntentList)
             {
                 foreach (Item child in root.Children)
                 {
@@ -35,11 +35,12 @@ namespace Hackathon.Feature.XConnectUtility.Repository
                         child.Fields[Templates.Intent.Fields.IntentText].Value == emailIntent.Intent)
                     {
                         var goal = child.Fields[Templates.Intent.Fields.Goal] != null ? child.Fields[Templates.Intent.Fields.Goal].Value : null;
+                         
                         var goalId = Guid.Parse(goal.ToString());
 
                         var contact = SearchContact(emailIntent.EmailId);
 
-                       // CreateInteraction(contact, goalId);
+                        CreateInteraction(contact, goalId, emailIntent.EmailSubject);
                     }
                 }
             }
@@ -47,30 +48,33 @@ namespace Hackathon.Feature.XConnectUtility.Repository
             return success;
         }
 
-        private void CreateInteraction(Task<Contact> contact, Guid goalId)
+        private void CreateInteraction(Contact contact, Guid goalId, string goalData)
         {
             using (Sitecore.XConnect.Client.XConnectClient client = Sitecore.XConnect.Client.Configuration.SitecoreXConnectClientConfiguration.GetClient())
             {
                 try
                 {
-                   Guid channelId = Guid.Parse("86c7467a-d019-460d-9fa9-85d6d5d77fc4"); // Replace with real channel ID GUID
-                    string userAgent = "XConnect Rocks";
+                    var newContact = new Sitecore.XConnect.Contact();
+                    client.AddContact(newContact);
 
-                    // Interaction
-                    var interaction = new Interaction(contact, InteractionInitiator.Brand, channelId, userAgent);
+                    // Create new interaction for this contact
+                    Guid channelId = Guid.NewGuid(); // Replace with channel ID from Sitecore
+                    string userAgent = "Mozilla/5.0 (Nintendo Switch; ShareApplet) AppleWebKit/601.6 (KHTML, like Gecko) NF/4.0.0.5.9 NintendoBrowser/5.1.0.13341";
+                    var interaction = new Sitecore.XConnect.Interaction(newContact, InteractionInitiator.Brand, channelId, userAgent);
 
-                    var fakeItemID = Guid.Parse("5746c4f3-7e16-40d9-ba1d-14c70875724c"); // Replace with real item ID
 
-                    Sitecore.XConnect.Collection.Model.CampaignEvent pageView = new CampaignEvent()
+                    // Create new instance of goal
+                    Sitecore.XConnect.Goal goal = new Goal(goalId, DateTime.UtcNow);
                     {
-                        Duration = new TimeSpan(0, 0, 30),
-                        Url = "/test/url/test/url?query=testing"
                     };
+                    goal.Data = goalData;
+                    // Add goal to interaction
+                    interaction.Events.Add(goal);
 
-                    interaction.Events.Add(pageView);
-
+                    // Add interaction operation to client
                     client.AddInteraction(interaction);
 
+                    // Submit interaction
                     client.Submit();
                 }
                 catch (Exception ex)
@@ -102,7 +106,7 @@ namespace Hackathon.Feature.XConnectUtility.Repository
             {
                 try
                 {
-                    var enumerator = client.Contacts.Where(x => x.Identifiers.Any(i => i.Identifier == emailId)).GetBatchEnumeratorSync(10); // Get the first 10 results
+                    var enumerator = client.Contacts.Where(x => x.Identifiers.Any(i => i.Identifier == emailId)).GetBatchEnumeratorSync(1); // Get the first 10 results
                     
                     // Total count of contacts (all batches)
                     var totalContacts = enumerator.TotalCount;

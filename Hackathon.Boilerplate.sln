@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.16
+VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Feature", "Feature", "{17DD5718-6E13-4F2C-9738-B410396D4552}"
 EndProject
@@ -29,13 +29,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "images", "images", "{D27C83
 		documentation\images\hackathon.png = documentation\images\hackathon.png
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hackathon.Feature.ServiceAPI", "src\Feature\ServiceAPI\Hackathon.Feature.ServiceAPI\Hackathon.Feature.ServiceAPI.csproj", "{3A7FC78D-6FA3-4529-8B7D-ABC914F1D3E6}"
+EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "XConnectRocks", "XConnectRocks", "{89C15BFF-33EE-4163-A37F-577850DBE2D5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hackathon.XConnectRocks", "src\XConnectRocks\Hackathon.XConnectRocks\Hackathon.XConnectRocks.csproj", "{E6433F80-3C54-4E22-9B56-EB23E0785158}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "XConnectUtility", "XConnectUtility", "{D53AA437-C797-4422-91C5-CB4F382D2E34}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hackathon.Feature.XConnectUtility", "src\Feature\XConnectUtility\code\Hackathon.Feature.XConnectUtility.csproj", "{3A7FC78D-6FA3-4529-8B7D-ABC914F1D3E6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,23 +41,22 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{E6433F80-3C54-4E22-9B56-EB23E0785158}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E6433F80-3C54-4E22-9B56-EB23E0785158}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E6433F80-3C54-4E22-9B56-EB23E0785158}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E6433F80-3C54-4E22-9B56-EB23E0785158}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3A7FC78D-6FA3-4529-8B7D-ABC914F1D3E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3A7FC78D-6FA3-4529-8B7D-ABC914F1D3E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3A7FC78D-6FA3-4529-8B7D-ABC914F1D3E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3A7FC78D-6FA3-4529-8B7D-ABC914F1D3E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6433F80-3C54-4E22-9B56-EB23E0785158}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6433F80-3C54-4E22-9B56-EB23E0785158}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6433F80-3C54-4E22-9B56-EB23E0785158}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6433F80-3C54-4E22-9B56-EB23E0785158}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{D27C83D2-2EAF-4E44-A1ED-2B3C2EBB5854} = {DAFED8F5-6CBD-4384-AAD6-DC3BCCF24911}
+		{3A7FC78D-6FA3-4529-8B7D-ABC914F1D3E6} = {17DD5718-6E13-4F2C-9738-B410396D4552}
 		{E6433F80-3C54-4E22-9B56-EB23E0785158} = {89C15BFF-33EE-4163-A37F-577850DBE2D5}
-		{D53AA437-C797-4422-91C5-CB4F382D2E34} = {17DD5718-6E13-4F2C-9738-B410396D4552}
-		{3A7FC78D-6FA3-4529-8B7D-ABC914F1D3E6} = {D53AA437-C797-4422-91C5-CB4F382D2E34}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {311DA37D-528B-43B2-A99B-E7253F841D46}
