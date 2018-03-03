@@ -1,9 +1,4 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Web.Script.Serialization;
 
 namespace XConnectRocks.Email
@@ -14,9 +9,7 @@ namespace XConnectRocks.Email
         {
             OutlookEmailClient objectoutlookclient = new OutlookEmailClient();
             List<OutlookEmailModel> emaiList = objectoutlookclient.GetOutlookemails();
-            var json = new JavaScriptSerializer().Serialize(emaiList);
-            // Console.Write((json));
-            //Console.Read();
+            var json = new JavaScriptSerializer().Serialize(emaiList);          
             return json;
         }
     }

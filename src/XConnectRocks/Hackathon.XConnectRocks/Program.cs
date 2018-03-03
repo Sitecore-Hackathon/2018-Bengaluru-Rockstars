@@ -24,36 +24,7 @@ namespace XConnectRocks
             {
                  GetValidContactsFromXdb(client);
             }
-
-            //MainAsync(args).ConfigureAwait(false).GetAwaiter().GetResult();
-            //var listOfEmails = OutlookUtility.ReadEmailsFromInbox();
-            //var emailList = JsonConvert.DeserializeObject<List<OutlookEmailModel>>(listOfEmails);
-            //if (emailList == null)
-            //    return;
-
-            //foreach (var email in emailList)
-            //{
-            //    bool isvalidUser = SearchContacts(email.EmailFrom);
-            //    if (isvalidUser)
-            //    {
-            //        string LUISAppUrl = ConfigurationManager.AppSettings["CognitiveService.OleChat.LUISAppUrl"];
-            //        string OleAppIdField = ConfigurationManager.AppSettings["CognitiveService.OleChat.OleAppId"];
-            //        string OleAppkey = ConfigurationManager.AppSettings["CognitiveService.OleChat.OleAppkey"];
-            //        HttpServiceHelper obj = new HttpServiceHelper();
-            //        var query = String.Concat(LUISAppUrl, OleAppIdField, "", OleAppkey,
-            //            "&verbose=true&timezoneOffset=0&q= looking ] for Product details please share the information .");
-            //        var data = obj.GetServiceResponse<LuisResult>(query, false);
-            //        if (data != null)
-            //        {
-            //            var requestedQuit =
-            //                data.TopScoringIntent.Intent.ToLower().Equals("quit") &&
-            //                data.TopScoringIntent.Score > 0.4;
-            //        }
-            //    }
-            //}
         }
-
-
 
         private static async Task MainAsync(string[] args)
         {
@@ -106,7 +77,7 @@ namespace XConnectRocks
             bool isvalidUser = false;
             foreach (var outlookEmailModel in emailList)
             {
-                SearchContacts(client, outlookEmailModel.EmailFrom);
+                isvalidUser =  SearchContacts(client, outlookEmailModel.EmailFrom);
                 if (isvalidUser)
                 {
                     string LUISAppUrl = ConfigurationManager.AppSettings[Constants.CognitiveServiceOleChatLUISAppUrl];
@@ -135,8 +106,7 @@ namespace XConnectRocks
         /// <param name="email"></param>
         /// <param name="isvalidUser"></param>
         /// <returns></returns>
-
-        private static void SearchContacts(XConnectClient client, string email)
+        private static bool SearchContacts(XConnectClient client, string email)
         {
             var isvalidUser = false;
            // using (XConnectClient client = GetClient())
@@ -173,20 +143,19 @@ namespace XConnectRocks
 
             }
 
-            // return isvalidUser;
+            return isvalidUser;
         }
 
 
         private static XConnectClient GetClient()
         {
-            XdbModel[] models = { CollectionModel.Model };
-        
+            var xConnectClientName = ConfigurationManager.AppSettings[Constants.xConnectClient];
+            XdbModel[] models = { CollectionModel.Model };        
 
             var config = new XConnectClientConfiguration(
                 new XdbRuntimeModel(models),
-                new Uri("https://xp091.xconnect"),
-                new Uri("https://xp091.xconnect"));
-
+                new Uri(xConnectClientName),
+                new Uri(xConnectClientName));
 
             try
             {
@@ -197,10 +166,7 @@ namespace XConnectRocks
                 Console.WriteLine(ex.Message);
                 throw;
             }
-
             return new XConnectClient(config);
-
-          
         }
 
 
