@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Hackathon.Feature.ServiceAPI
+namespace Hackathon.Feature.XConnectUtility
 {
     public static class Constants
     {

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Http;
 
-namespace Hackathon.Feature.ServiceAPI.Processor
+namespace Hackathon.Feature.XConnectUtility.Processor
 {
     public class RegisterRoute
     {

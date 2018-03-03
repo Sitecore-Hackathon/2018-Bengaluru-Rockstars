@@ -12,10 +12,10 @@ using System.Net;
 using System.Web.Helpers;
 using Newtonsoft.Json;
 using System;
-using Hackathon.Feature.ServiceAPI.Models;
-using Hackathon.Feature.ServiceAPI.Repository;
+using Hackathon.Feature.XConnectUtility.Models;
+using Hackathon.Feature.XConnectUtility.Repository;
 
-namespace Hackathon.Feature.ServiceAPI.Controllers
+namespace Hackathon.Feature.XConnectUtility.Controllers
 {
     [ServicesController]
     [EnableCors(origins: "http://localhost:3000", headers: "*", methods: "GET,POST")]
