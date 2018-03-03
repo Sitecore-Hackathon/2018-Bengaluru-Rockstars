@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="XConnectDashboard.aspx.cs" Inherits="Hackathon.Feature.ServiceAPI.sitecore.admin.XConnectDashboard" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="XConnectDashboard.aspx.cs" Inherits="Hackathon.Feature.XConnectUtility.sitecore.admin.XConnectDashboard" %>
 
 <!DOCTYPE html>
 

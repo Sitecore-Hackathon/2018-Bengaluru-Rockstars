@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Hackathon.Feature.ServiceAPI.sitecore.admin {
+namespace Hackathon.Feature.XConnectUtility.sitecore.admin {
     
     
     public partial class XConnectDashboard {

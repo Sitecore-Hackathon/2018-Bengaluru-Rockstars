@@ -7,8 +7,9 @@ namespace Hackathon.Feature.XConnectUtility.Models
 {
     public class EmailIntent
     {
-        public string EmailId { get; set; }
+        public string EmailFrom { get; set; }
         public string EmailSubject { get; set; }
         public string Intent { get; set; }
+        public string EmailBody { get; set; }
     }
 }
