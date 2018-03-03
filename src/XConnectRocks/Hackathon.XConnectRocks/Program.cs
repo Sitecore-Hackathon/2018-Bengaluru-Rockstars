@@ -116,19 +116,14 @@ namespace XConnectRocks
                     string apiToTrigger = ConfigurationManager.AppSettings[Constants.APIToTriggerGoals];
 
                     var query = String.Concat(LUISAppUrl, oleAppId, "", oleAppkey,
-                        "&verbose=true&timezoneOffset=0&q= looking ]" + outlookEmailModel.EmailBody);
+                        "" + outlookEmailModel.EmailBody);
                     var data = obj.GetServiceResponse<LuisResult>(query, false);
                     if (data != null)
                     {
-                        //var requestedQuit =
-                        //    data.TopScoringIntent.Intent.ToLower().Equals("quit") &&
-                        //    data.TopScoringIntent.Score > 0.4;
-                        var itendName = data.TopScoringIntent.Intent.ToLower();
-                        var urlToTriggerGoal = string.Concat(apiToTrigger, "?Email= ", outlookEmailModel.EmailFrom,
-                            "&Intent=", itendName);
-
+                       
+                        outlookEmailModel.Intent = data.TopScoringIntent.Intent.ToLower();
                         // Call  sitecore api controller to trigger call;
-                        obj.HttpGet(urlToTriggerGoal);
+                        obj.HttpGet(apiToTrigger);
                     }
                 }
             }

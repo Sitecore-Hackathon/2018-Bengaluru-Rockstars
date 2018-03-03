@@ -11,6 +11,7 @@ namespace XConnectRocks.Email
         public string EmailFrom { get; set; }
         public string EmailSubject { get; set; }
         public  string EmailBody { get; set; }
+        public string Intent { get; set; }
     }
 }
 

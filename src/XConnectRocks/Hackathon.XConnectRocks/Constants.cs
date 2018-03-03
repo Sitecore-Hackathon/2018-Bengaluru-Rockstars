@@ -14,5 +14,6 @@ namespace XConnectRocks
         public const string xConnectCertificate = "xConnectCertificate";
         public const string xConnectClient = "xConnectClient";
         public const string APIToTriggerGoals = "APIToTriggerGoals";
+        public const string APIParameters = "&verbose=true&timezoneOffset=0&q=";
     }
 }
