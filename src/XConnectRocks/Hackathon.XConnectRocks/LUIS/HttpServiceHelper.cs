@@ -15,7 +15,7 @@
         /// <param name="uri"></param>
         /// <param name="traceOn">Pass traceOn as true to debug the service. Maintain this key in a configuration</param>
         /// <returns></returns>
-        public HttpMethodResult HttpGet(string uri, bool traceOn = false)
+        public HttpMethodResult HttpGet(string uri, bool traceOn = false, string jsonInput ="")
         {
 
             try
@@ -25,6 +25,10 @@
                 var httpWebRequest = (HttpWebRequest)WebRequest.Create(new Uri(uri, UriKind.Absolute));
 
                 httpWebRequest.Method = "GET";
+                if(!string.IsNullOrEmpty(jsonInput))
+                {
+                    httpWebRequest.Headers.Add("UserData", jsonInput);
+                }
 
                 httpWebRequest.Credentials = CredentialCache.DefaultCredentials;
 
