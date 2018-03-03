@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Hackathon.Feature.ServiceAPI.Models;
+using Hackathon.Feature.XConnectUtility.Models;
 using Sitecore.Data;
 using Sitecore;
 using Sitecore.Configuration;
@@ -12,7 +12,7 @@ using Sitecore.XConnect;
 using Sitecore.XConnect.Client;
 using System.Threading.Tasks;
 
-namespace Hackathon.Feature.ServiceAPI.Repository
+namespace Hackathon.Feature.XConnectUtility.Repository
 {
     public class ServiceRepository : IServiceRepository
     {
