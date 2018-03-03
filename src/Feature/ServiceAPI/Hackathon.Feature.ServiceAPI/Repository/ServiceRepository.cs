@@ -27,7 +27,7 @@ namespace Hackathon.Feature.ServiceAPI.Repository
 
             bool success = true;
 
-            foreach (var emailIntent in tempList().EmailIntentList) // list.EmailIntentList
+            foreach (var emailIntent in  list.EmailIntentList)
             {
                 foreach (Item child in root.Children)
                 {
@@ -35,11 +35,12 @@ namespace Hackathon.Feature.ServiceAPI.Repository
                         child.Fields[Templates.Intent.Fields.IntentText].Value == emailIntent.Intent)
                     {
                         var goal = child.Fields[Templates.Intent.Fields.Goal] != null ? child.Fields[Templates.Intent.Fields.Goal].Value : null;
+                         
                         var goalId = Guid.Parse(goal.ToString());
 
                         var contact = SearchContact(emailIntent.EmailId);
 
-                       // CreateInteraction(contact, goalId);
+                        CreateInteraction(contact, goalId, emailIntent.EmailSubject);
                     }
                 }
             }
@@ -47,7 +48,7 @@ namespace Hackathon.Feature.ServiceAPI.Repository
             return success;
         }
 
-        private void CreateInteraction(Task<Contact> contact, Guid goalId)
+        private void CreateInteraction(Contact contact, Guid goalId, string goalData)
         {
             using (Sitecore.XConnect.Client.XConnectClient client = Sitecore.XConnect.Client.Configuration.SitecoreXConnectClientConfiguration.GetClient())
             {
@@ -61,20 +62,20 @@ namespace Hackathon.Feature.ServiceAPI.Repository
                     string userAgent = "Mozilla/5.0 (Nintendo Switch; ShareApplet) AppleWebKit/601.6 (KHTML, like Gecko) NF/4.0.0.5.9 NintendoBrowser/5.1.0.13341";
                     var interaction = new Sitecore.XConnect.Interaction(newContact, InteractionInitiator.Brand, channelId, userAgent);
 
-                    
-                    //// Create new instance of goal
-                    //Sitecore.XConnect.Model.Goal goal = new Goal(goalId, DateTime.UtcNow);
-                    //{
-                    //};
 
-                    //// Add goal to interaction
-                    //interaction.Events.Add(goal);
+                    // Create new instance of goal
+                    Sitecore.XConnect.Goal goal = new Goal(goalId, DateTime.UtcNow);
+                    {
+                    };
+                    goal.Data = goalData;
+                    // Add goal to interaction
+                    interaction.Events.Add(goal);
 
-                    //// Add interaction operation to client
-                    //client.AddInteraction(interaction);
+                    // Add interaction operation to client
+                    client.AddInteraction(interaction);
 
-                    //// Submit interaction
-                    //client.Submit();
+                    // Submit interaction
+                    client.Submit();
                 }
                 catch (Exception ex)
                 {
