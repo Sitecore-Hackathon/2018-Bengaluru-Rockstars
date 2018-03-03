@@ -39,7 +39,7 @@ namespace Hackathon.Feature.ServiceAPI.Repository
 
                         var contact = SearchContact(emailIntent.EmailId);
 
-                        CreateInteraction(contact, goalId);
+                       // CreateInteraction(contact, goalId);
                     }
                 }
             }
@@ -62,19 +62,19 @@ namespace Hackathon.Feature.ServiceAPI.Repository
                     var interaction = new Sitecore.XConnect.Interaction(newContact, InteractionInitiator.Brand, channelId, userAgent);
 
                     
-                    // Create new instance of goal
-                    Sitecore.XConnect.Model.Goal goal = new Goal(goalId, DateTime.UtcNow);
-                    {
-                    };
+                    //// Create new instance of goal
+                    //Sitecore.XConnect.Model.Goal goal = new Goal(goalId, DateTime.UtcNow);
+                    //{
+                    //};
 
-                    // Add goal to interaction
-                    interaction.Events.Add(goal);
+                    //// Add goal to interaction
+                    //interaction.Events.Add(goal);
 
-                    // Add interaction operation to client
-                    client.AddInteraction(interaction);
+                    //// Add interaction operation to client
+                    //client.AddInteraction(interaction);
 
-                    // Submit interaction
-                    client.Submit();
+                    //// Submit interaction
+                    //client.Submit();
                 }
                 catch (Exception ex)
                 {
