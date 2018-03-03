@@ -9,6 +9,6 @@ namespace Hackathon.Feature.XConnectUtility.Repository
 {
     interface IServiceRepository
     {
-        bool TriggerGoals(EmailIntents list);
+        bool TriggerGoals(EmailIntent emailIntent);
     }
 }

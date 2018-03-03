@@ -19,7 +19,7 @@ namespace Hackathon.Feature.XConnectUtility.Repository
         private static Database _db;
         private static Database MasterDb => _db ?? (_db = Context.ContentDatabase ?? Factory.GetDatabase("master"));
 
-        bool IServiceRepository.TriggerGoals(EmailIntents list)
+        bool IServiceRepository.TriggerGoals(EmailIntent emailIntent)
         {
             //createContacts();
 
@@ -27,23 +27,22 @@ namespace Hackathon.Feature.XConnectUtility.Repository
 
             bool success = true;
 
-            foreach (var emailIntent in  list.EmailIntentList)
+
+            foreach (Item child in root.Children)
             {
-                foreach (Item child in root.Children)
+                if (child.Fields[Templates.Intent.Fields.IntentText] != null &&
+                    child.Fields[Templates.Intent.Fields.IntentText].Value == emailIntent.Intent)
                 {
-                    if (child.Fields[Templates.Intent.Fields.IntentText] != null &&
-                        child.Fields[Templates.Intent.Fields.IntentText].Value == emailIntent.Intent)
-                    {
-                        var goal = child.Fields[Templates.Intent.Fields.Goal] != null ? child.Fields[Templates.Intent.Fields.Goal].Value : null;
-                         
-                        var goalId = Guid.Parse(goal.ToString());
+                    var goal = child.Fields[Templates.Intent.Fields.Goal] != null ? child.Fields[Templates.Intent.Fields.Goal].Value : null;
 
-                        var contact = SearchContact(emailIntent.EmailId);
+                    var goalId = Guid.Parse(goal.ToString());
 
-                        CreateInteraction(contact, goalId, emailIntent.EmailSubject);
-                    }
+                    var contact = SearchContact(emailIntent.EmailFrom);
+
+                    CreateInteraction(contact, goalId, emailIntent.EmailSubject);
                 }
             }
+
 
             return success;
         }
@@ -84,18 +83,18 @@ namespace Hackathon.Feature.XConnectUtility.Repository
             }
         }
 
-        EmailIntents tempList()
-        {
-            EmailIntents list = new EmailIntents();
+        //EmailIntents tempList()
+        //{
+        //    EmailIntents list = new EmailIntents();
 
-            list.EmailIntentList = new List<EmailIntent>();
+        //    list.EmailIntentList = new List<EmailIntent>();
 
-            list.EmailIntentList.Add(new EmailIntent { EmailId = "ddsundaria@gmail.com", EmailSubject = "test mail", Intent = "Requested for Demo" });
-            list.EmailIntentList.Add(new EmailIntent { EmailId = "aji@gmail.com", EmailSubject = "test mail", Intent = "Interested in Products " });
-            list.EmailIntentList.Add(new EmailIntent { EmailId = "jisha@gmail.com", EmailSubject = "test mail", Intent = "Product" });
+        //    list.EmailIntentList.Add(new EmailIntent { EmailFrom = "ddsundaria@gmail.com", EmailSubject = "test mail", Intent = "Requested for Demo" });
+        //    list.EmailIntentList.Add(new EmailIntent { EmailFrom = "aji@gmail.com", EmailSubject = "test mail", Intent = "Interested in Products " });
+        //    list.EmailIntentList.Add(new EmailIntent { EmailFrom = "jisha@gmail.com", EmailSubject = "test mail", Intent = "Product" });
 
-            return list;
-        }
+        //    return list;
+        //}
 
         Contact SearchContact(string emailId)
         {
@@ -107,7 +106,7 @@ namespace Hackathon.Feature.XConnectUtility.Repository
                 try
                 {
                     var enumerator = client.Contacts.Where(x => x.Identifiers.Any(i => i.Identifier == emailId)).GetBatchEnumeratorSync(1); // Get the first 10 results
-                    
+
                     // Total count of contacts (all batches)
                     var totalContacts = enumerator.TotalCount;
 
@@ -126,35 +125,35 @@ namespace Hackathon.Feature.XConnectUtility.Repository
                 {
                     return null;
                 }
-                
+
             }
 
             return returnValue;
         }
 
-        void CreateContacts()
-        {
-            var list = tempList();
-            foreach (var a in list.EmailIntentList)
-            {
-                using (XConnectClient client = Sitecore.XConnect.Client.Configuration.SitecoreXConnectClientConfiguration.GetClient())
-                {
-                    try
-                    {
-                        var identifier = new ContactIdentifier("email", a.EmailId, ContactIdentifierType.Known);
+        //void CreateContacts()
+        //{
+        //    var list = tempList();
+        //    foreach (var a in list.EmailIntentList)
+        //    {
+        //        using (XConnectClient client = Sitecore.XConnect.Client.Configuration.SitecoreXConnectClientConfiguration.GetClient())
+        //        {
+        //            try
+        //            {
+        //                var identifier = new ContactIdentifier("email", a.EmailId, ContactIdentifierType.Known);
 
-                        var contact = new Contact(identifier);
+        //                var contact = new Contact(identifier);
 
-                        client.AddContact(contact);
-                        client.Submit();
-                    }
-                    catch (XdbExecutionException ex)
-                    {
+        //                client.AddContact(contact);
+        //                client.Submit();
+        //            }
+        //            catch (XdbExecutionException ex)
+        //            {
 
-                    }
-                }
-            }
-        }
+        //            }
+        //        }
+        //    }
+        //}
 
     }
 }

@@ -24,20 +24,23 @@ namespace Hackathon.Feature.XConnectUtility.Controllers
         [HttpGet]
         public IHttpActionResult Get()
         {
-            HttpRequestMessage re = new HttpRequestMessage();
-            var headers = re.Headers;
-
-            EmailIntents list = new EmailIntents();
-
-            IServiceRepository repo = new ServiceRepository();
-            var result = repo.TriggerGoals(list);
-
-            if (result)
+            var result = false;
+            if (Request.Headers.Contains("UserData"))
             {
-                return Content(HttpStatusCode.OK, result);
-            }
+                IEnumerable<string> headerValues = Request.Headers.GetValues("UserData");
+                var jsonData = headerValues.FirstOrDefault();
 
-            return Content(HttpStatusCode.NotFound, result);
+                EmailIntent list = JsonConvert.DeserializeObject<EmailIntent>(jsonData);
+
+                IServiceRepository repo = new ServiceRepository();
+                result = repo.TriggerGoals(list);
+
+                if (result)
+                {
+                    return Content(HttpStatusCode.OK, result);
+                }
+            }
+            return Content(HttpStatusCode.BadRequest, result);
         }
     }
 }

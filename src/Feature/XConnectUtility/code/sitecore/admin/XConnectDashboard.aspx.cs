@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using Sitecore.XConnect.Operations;
 using Sitecore.XConnect.Client;
-using Hackathon.Feature.ServiceAPI.Models;
+using Hackathon.Feature.XConnectUtility.Models;
 
-namespace Hackathon.Feature.ServiceAPI.sitecore.admin
+namespace Hackathon.Feature.XConnectUtility.sitecore.admin
 {
     public partial class XConnectDashboard : System.Web.UI.Page
     {
