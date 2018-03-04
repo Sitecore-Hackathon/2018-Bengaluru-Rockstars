@@ -66,9 +66,13 @@ Examples of things to include are the following.
 
 ## Summary
 
-**Category:** Hackathon Category
+**Category:** 
 
-What is the purpose of your module? What problem does it solve and how does it do that?
+XConnect
+
+xConnect is the service layer that sits in between the xDB and any trusted client, device, or interface that wants to read, write, or search xDB data.
+
+ Currently there is no option available in sitecore to track offline email communications and we have created a app to scan the local emails available on local outlook inbox and based on the content of emails interaction are tracked across identified contacts. record important interactions in xDB. 
 
 ## Pre-requisites
 
