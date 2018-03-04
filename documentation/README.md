@@ -76,7 +76,9 @@ xConnect is the service layer that sits in between the xDB and any trusted clien
 
 ## Pre-requisites
 
-Does your module rely on other Sitecore modules or frameworks?
+ 
+PreRequistite: Outlook 2016 is running on the local machine and the dll referenced in the application Xconnect Rocks
+
 
 - List any dependencies
 - Or other modules that must be installed
@@ -86,9 +88,30 @@ Does your module rely on other Sitecore modules or frameworks?
 
 Provide detailed instructions on how to install the module, and include screenshots where necessary.
 
-1. Use the Sitecore Installation wizard to install the [package](#link-to-package)
-2. ???
-3. Profit
+Install sitecore 9 instance
+•	Download the Solution and Sitecore Package 
+•	Dropbox URL : https://lion.app.box.com/folder/46277246138
+•	Install a vanilla Sitecore 9.0 Update 1 Module (Module install package) instance on system
+•	Install sitecore 
+•	Replace the connection string file
+•	Install the package on sitecore which will install a template and related item in the master database and core database
+
+Setup XConnect Rocks 
+Install XConnect Rocks 
+•	Build the solution Hackathon.XConnectRocks and start the windows Application.
+•	Modify App.config file available under the path “” and set the LUIS App keys and  other certificate information for the xconnect application. This console utilizes Sitecore Cognitive Service Ole Chat library for making connection to LIS and getting responses. 
+•	
+
+<add key="CognitiveService.OleChat.LUISAppUrl" value="https://westus.api.cognitive.microsoft.com/luis/v2.0/apps" />
+    <add key="CognitiveService.OleChat.OleAppId" value="" />
+    <add key="CognitiveService.OleChat.OleAppkey" value="" />
+    <add key="xConnectCertificate" value="StoreName=My;StoreLocation=LocalMachine;FindType=FindByThumbprint;FindValue=" />
+    <add key="xConnectClient" value="https://xp091.xconnect/" />
+    <add key="APIToTriggerGoals" value="https://xp091.xconnect/" />
+
+
+•	 Click the button “Rescan Email” to scan emails available on local outlook. The assumption made is that that the outlook is already running on the local machine. 
+
 
 ## Configuration
 
