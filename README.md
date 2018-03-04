@@ -16,28 +16,43 @@ Currently there is no option available in sitecore to track offline email commun
 ## Solution 
 This is a console application which we have created to showcase omni-channel capabilities of xConnect, this is mainly for tracking the offline email communication happening with marketing team\call center agents. Most of us will be having outlook at our machines runs and we are utilizing that to get offline interactions. This console application runs at local machine and scans unread email sand the content will be processed against natural processing language API LUIS and recognize important transactions.   This application reads markets’ inbox and notify users about unread transactions happening, we have set up a dashboard on sitecore content editor and user will be able to see the current day reports there, like users who initiated goals & their email subject. The real catch in the implementation is that the mails will be placed I to LIUS queue only if that sender email id is a valid/identified visitor on the site.  This app reads unread emails from marketer’s local inbox and scan the email content. This email content will be passed to LUIS to identify the intent type, once intent has been identified the corresponding goal will be fetched from sitecore and that will be triggered against that identified contact. 
 
-All teams are required to submit the following as part of their entry submission on or before the end of the Hackathon on **Saturday March 3rd 2018 at 8PM EST**. The modules should be based on [Sitecore 9.0 rev. 171219 (Update-1)](https://dev.sitecore.net/Downloads/Sitecore_Experience_Platform/90/Sitecore_Experience_Platform_90_Update1.aspx).
+Package is uploaded at 
 
-**Failure to meet any of the requirements will result in automatic disqualification.** Please reach out to any of the organisers or judges if you require any clarification.
+https://github.com/Sitecore-Hackathon/2018-Bengaluru-Rockstars/blob/master/sc.package/Sitecore%20Hacathon-2018-Bangalore%20Rockers-Sitecore-.zip
 
-- Sitecore 9.0 Update 1 Module (Module install package)
-   - An installation Sitecore Package (`.zip` or `.update`)
+Getting Started
+•	Download the Solution and Sitecore Package 
+•	Dropbox URL : https://lion.app.box.com/folder/46277246138
+•	Install a vanilla Sitecore 9.2 Version 2 instance on system
+•	Setup the publish profile and publish the solution (Default publish profile is pointing to C:\inetpub\wwwroot\hackathon\Website)
+•	Replace the connection string file
+•	Install the package on sitecore which will install a template and related item in the master database and core database
 
-- Module code in a public Git source repository. We will be judging (amongst other things):
-  - Cleanliness of code
-  - Commenting where necessary
-  - Code Structure
-  - Standard coding standards & naming conventions
+#Getting Started
+Install sitecore 9 instance
+•	Download the Solution and Sitecore Package 
+•	Dropbox URL : https://lion.app.box.com/folder/46277246138
+•	Install a vanilla Sitecore 9.0 Update 1 Module (Module install package) instance on system
+•	Install sitecore 
+•	Replace the connection string file
+•	Install the package on sitecore which will install a template and related item in the master database and core database
 
-- Precise and Clear Installation Instructions document (1 – 2 pages)
-- Module usage documentation on [Readme.md](documentation) file on the Git Repository (2 – 5 pages)
-  - Module Purpose
-  - Module Sitecore Hackathon Category
-  - How does the end user use the Module?
-  - Screenshots, etc.
+Setup XConnect Rocks 
+Install XConnect Rocks 
+•	Build the solution Hackathon.XConnectRocks and start the windows Application.
+•	Modify App.config file available under the path “” and set the LUIS App keys and  other certificate information for the xconnect application. This console utilizes Sitecore Cognitive Service Ole Chat library for making connection to LIS and getting responses. 
+•	
 
-- Create a 2 – 10 minutes video explaining the module’s functionality (A link to youtube video)
+<add key="CognitiveService.OleChat.LUISAppUrl" value="https://westus.api.cognitive.microsoft.com/luis/v2.0/apps" />
+    <add key="CognitiveService.OleChat.OleAppId" value="4590b630-2880-45e9-9dd1-13bdcc7b0093" />
+    <add key="CognitiveService.OleChat.OleAppkey" value="13a3cf2af855495fbefe916a24de362e" />
+    <add key="xConnectCertificate" value="StoreName=My;StoreLocation=LocalMachine;FindType=FindByThumbprint;FindValue=9EE7C4BA97D87E31F0300F2E1EAEC7E0BD7CC144" />
+    <add key="xConnectClient" value="https://xp091.xconnect/" />
+    <add key="APIToTriggerGoals" value="https://xp091.xconnect/" />
 
-  - What problem was solved
-  - How did you solve it
-  - What is the end result
+
+•	 Click the button “Rescan Email” to scan emails available on local outlook. The assumption made is that that the outlook is already running on the local machine. 
+ 
+PreRequistite: Outlook 2016 is running on the local machine and the dll referenced in the application Xconnect Rocks
+
+
