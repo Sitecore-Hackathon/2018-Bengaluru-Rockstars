@@ -30,8 +30,7 @@ Getting Started
 
 #Getting Started
 Install sitecore 9 instance
-•	Download the Solution and Sitecore Package 
-•	Dropbox URL : https://lion.app.box.com/folder/46277246138
+•	Download the Solution and Sitecore Package •
 •	Install a vanilla Sitecore 9.0 Update 1 Module (Module install package) instance on system
 •	Install sitecore 
 •	Replace the connection string file
