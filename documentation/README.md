@@ -50,21 +50,72 @@ Remember you are using Markdown, you can provide code samples too:
 
 ## Usage
 
-Provide documentation  about your module, how do the users use your module, where are things located, what do icons mean, are there any secret shortcuts etc.
+Sitecore Hackathon 2018
 
-Please include screenshots where necessary. You can add images to the `./images` folder and then link to them from your documentation:
+Implementation Guide - XConnect Rocks 
 
-![Hackathon Logo](images/hackathon.png?raw=true "Hackathon Logo")
 
-You can embed images of different formats too:
 
-![Deal With It](images/deal-with-it.gif?raw=true "Deal With It")
 
-And you can embed external images too:
+
+
+
+
+Team Name: Bengaluru Rockstars Team
+Member 1 : Aji Viswanadhan 
+Member 2 :  Deendayal Sundaria S
+Member 3 : Jisha Muthuswamy
+Implemntation Document for XConnect Rocks
+Problem Statement/Use case: 
+Currently there is no option available in sitecore to track offline email communications and we have created a app to scan the local emails available on local outlook inbox and based on the content of emails interaction are tracked across identified contacts. record important interactions in xDB. 
+Solution:
+ 
+This is a console application which we have created to showcase omni-channel capabilities of xConnect, this is mainly for tracking the offline email communication happening with marketing team\call center agents. Most of us will be having outlook at our machines runs and we are utilizing that to get offline interactions. This console application runs at local machine and scans unread email sand the content will be processed against natural processing language API LUIS and recognize important transactions.   This application reads markets’ inbox and notify users about unread transactions happening, we have set up a dashboard on sitecore content editor and user will be able to see the current day reports there, like users who initiated goals & their email subject. The real catch in the implementation is that the mails will be placed I to LIUS queue only if that sender email id is a valid/identified visitor on the site.  This app reads unread emails from marketer’s local inbox and scan the email content. This email content will be passed to LUIS to identify the intent type, once intent has been identified the corresponding goal will be fetched from sitecore and that will be triggered against that identified contact. 
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Initial Setup at LUIS, goals has been set up as Intendeds, and usual questionnaire as utterances.
+Intents has been created at LUIS to determine goals and its associated with entities. This will be save to XDB while triggering the goals and same can be used later.
+ 
+ 
+
+ 
+
+
+Intent Goals mapping in local.
+  
+
+ 
+Final Dashboard where marketers can team can get their offline interaction reports.
+ 
+
 
 ![Random](https://placeimg.com/480/240/any "Random")
 
 ## Video
+ Video Url can be found here 
+https://youtu.be/M9Dv13-Kg_8
 
 Please provide a video highlighing your Hackathon module submission and provide a link to the video. Either a [direct link](https://www.youtube.com/watch?v=EpNhxW4pNKk) to the video, upload it to this documentation folder or maybe upload it to Youtube...
 
